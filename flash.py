@@ -19,9 +19,10 @@ class Flash(pygame.sprite.Sprite):
         self.num_flashs = num_flashs
 
     def active(self, event: pygame.event, maze_map: dict, x: int, y: int, flashs_list: list):
-
+        trigger = False
         if event.type == KEYDOWN:
             if event.key in [self.left, self.right, self.up, self.down]:
+                trigger = True
                 directions = {
                     self.left: ["W", [-1, 0]],
                     self.right: ["E", [1, 0]],
@@ -48,4 +49,4 @@ class Flash(pygame.sprite.Sprite):
         elif len(flashs_list) > self.num_flashs:
             flashs_list.pop(0)
 
-        return flashs_list
+        return flashs_list, trigger

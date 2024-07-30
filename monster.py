@@ -13,7 +13,7 @@ def solve_path(start_coord_tuple, end_coord_tuple, m):
             rep = False
         else:
             for d in 'EWSN':
-                if m.maze_map[current_space][d]:
+                if m[current_space][d]:
                     if d=='W':
                         sub_space=(current_space[0],current_space[1]-1)
                     elif d=='E':
@@ -26,7 +26,7 @@ def solve_path(start_coord_tuple, end_coord_tuple, m):
                     possibles.append(sub_space)
                     got_into.append(sub_space)
                     bfs_solved_path_rev[sub_space]=current_space
-    path={}
+    path = {}
     cell = end
     while cell != start:
         path[bfs_solved_path_rev[cell]] = cell
