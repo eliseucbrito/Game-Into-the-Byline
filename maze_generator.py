@@ -1,7 +1,6 @@
 import pygame
 import pyamaze
 
-
 #  Classe que representa o rect do labirinto
 class Maze(pygame.sprite.Sprite):
     MAZE_COLOR = (255, 255, 255)
