@@ -19,6 +19,8 @@ class Player:
         self.up = up
         self.down = down
         self.speed = width_maze / num_pixels
+        self.player_position = (self.pos_y + 1, self.pos_x + 1)
+        self.inventory = {"k": 0, "g": 1, "s": 1, "r": 1}
 
     def spawn(self, num_pixels):
 
@@ -28,15 +30,20 @@ class Player:
         else:
             self.pos_y = random.choice([0, num_pixels - 1])
 
+    def add_inventory(self, item):
+        if item in self.inventory:
+            self.inventory[item] += 1
+            print(self.inventory)
+
     def draw(self, x_maze, y_maze):
 
         pos_x = self.pos_x * self.speed + x_maze + (self.speed - self.width) / 2
         pos_y = self.pos_y * self.speed + y_maze + (self.speed - self.height) / 2
 
         pygame.draw.rect(self.window, self.color, (pos_x, pos_y, self.width, self.height))
-        pygame.display.update((self.pos_x * self.speed + x_maze, self.pos_y * self.speed + y_maze, self.speed, self.speed))
+        # pygame.display.update((self.pos_x * self.speed + x_maze, self.pos_y * self.speed + y_maze, self.speed, self.speed))
 
-        #return self.pos_x + 1, self.pos_y + 1
+        return self.pos_x + 1, self.pos_y + 1
 
     def control(self, event, maze_map):
 
@@ -58,5 +65,7 @@ class Player:
             elif event.key == self.down and possible_directions["S"]:
                 step.play()
                 self.pos_y += 1
+
+        self.player_position = (self.pos_y + 1, self.pos_x + 1)
 
         return self.pos_x, self.pos_y
