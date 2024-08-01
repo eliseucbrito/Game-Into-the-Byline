@@ -3,9 +3,11 @@ import random
 import utils
 
 from pygame.locals import *
+from player import Player
+from inventory import Inventory
 
 
-QTY_BOXES = 20
+QTY_BOXES = 400
 glowstick_tick = 10
 radar_tick = 30
 super_battery_tick = 40
@@ -40,30 +42,31 @@ class Boxes(pygame.sprite.Sprite):
                 self.itens.insert(index, "#")
         self.boxes_pos = positions
 
-    def get_box(self, event, flashs_list, player):
+    def get_box(self, event, flashs_list, player: Player, inventory: Inventory):
         if event.key == K_SPACE:
-            if player.player_position in self.boxes_pos:
+            if player.position_maze in self.boxes_pos:
 
                 flash_cells = []
                 for flash_list in flashs_list:
                     for column, line in flash_list:
                         flash_cells.append((line + 1, column + 1))
 
-                if player.player_position in flash_cells:
+                if player.position_maze in flash_cells:
                     item = self.itens.pop(0)
 
                     print("ITEM PEGO!")
                     print(f"Item: {item}")
 
                     open_chest.play()
-                    self.boxes_pos.remove(player.player_position)
+                    self.boxes_pos.remove(player.position_maze)
 
                     if item != "#" and player.inventory[item] <= 6:
-                        player.add_inventory(item)
+                        inventory.add_item(item)
                         return 1
 
-    def draw(self, screen, maze, flashs_list):
+    def draw(self, screen, maze, flashs_list, glowsticks_list):
         flash_cells = []
+
 
         for flash_list in flashs_list:
             for column, line in flash_list:
