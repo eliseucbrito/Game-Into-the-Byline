@@ -1,11 +1,13 @@
 import pygame
+import random
+import utils
+
 from pygame.locals import *
 from pygame import mixer
-import random
+
 
 mixer.init()
 step = mixer.Sound("assets/sounds/steps.mp3")
-
 
 class Player:
     def __init__(self, x, y, win, width, height, color, left, right, up, down, width_maze, num_pixels):
@@ -21,6 +23,7 @@ class Player:
         self.down = down
         self.speed = width_maze / num_pixels
         self.player_position = (self.pos_y + 1, self.pos_x + 1)
+        self.inventory = {"k": 0, "g": 1, "s": 1, "r": 1}
 
     def spawn(self, num_pixels):
 
@@ -29,6 +32,11 @@ class Player:
             self.pos_y = random.randint(0, num_pixels - 1)
         else:
             self.pos_y = random.choice([0, num_pixels - 1])
+
+    def add_inventory(self, item):
+        if item in self.inventory:
+            self.inventory[item] += 1
+            print(self.inventory)
 
     def draw(self, x_maze, y_maze):
 

@@ -6,7 +6,8 @@ from pygame.locals import *
 from sys import exit
 from player import Player
 from flash import Flash
-from collectables import Collectables
+from boxes import Boxes
+from items import Items
 
 
 RESOLUTION = (1280, 720)
@@ -25,13 +26,14 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.icon = pygame.image.load('assets/icon.png')
+        self.icon = pygame.image.load('assets/icon/icon.png')
         pygame.display.set_icon(self.icon)
 
         self.map_id = "home_screen"
         self.display = utils.load_display(self.map_id, RESOLUTION)
 
         self.music = "None :)"
+        self.font = pygame.font.Font("assets/fonts/Pixelation.ttf", 25)
 
         x, y, width, height, color = 1, 1, 10, 10, (33, 179, 76)
         left, right, up, down = K_a, K_d, K_w, K_s
@@ -43,11 +45,14 @@ class Game:
         self.maze_map = maze_generator.get_mazemap()
         self.maze = maze_generator.Maze(57.5, 57.5, 600, 600, self.maze_map)
 
-        self.collectables = Collectables()
-        self.collectables.generate_boxes(self.maze_map)
+        self.boxes = Boxes()
+        self.boxes.generate_boxes(self.maze_map)
+
+        self.items = Items(self.player, self.boxes)
 
     def run(self):
         global flashs_list
+        maze_game = False
 
         while True:
             self.clock.tick(60)
@@ -64,11 +69,14 @@ class Game:
                         exit()
                     if self.map_id == "home_screen":
                         if event.key == pygame.K_1:
-                            self.map_id = "not_scared"
+                            self.map_id = "background"
                             self.display = utils.load_display(self.map_id, RESOLUTION)
                             self.music = utils.set_music(self.map_id)
+                            self.screen.fill((0, 0, 0))
+                            pygame.display.update()
                             self.music.play()
-                            pygame.time.delay(4000)
+                            pygame.time.delay(5000)
+                            texts = utils.update_qty_items(self.font, self.player)
                             self.player.spawn(20)
                         if event.key == pygame.K_2:
                             self.map_id = "config"
@@ -78,8 +86,17 @@ class Game:
                             pygame.quit()
                             exit()
 
-                    self.collectables.get_box(event, flashs_list, self.player.player_position)
+                    if maze_game:
+                        item_used = self.items.use_item(event)
+                        if item_used:
+                            texts = utils.update_qty_items(self.font, self.player)
+
+                    item_added = self.boxes.get_box(event, flashs_list, self.player)
+                    if item_added:
+                        texts = utils.update_qty_items(self.font, self.player)
+
                     x, y = self.player.control(event, self.maze_map)
+
                     flashs_list = self.flash.active(event, self.maze_map, x, y, flashs_list)
 
                     cells = []
@@ -93,10 +110,11 @@ class Game:
                 self.screen.blit(self.display, (0, 0))
                 pygame.display.update()
             else:
+                maze_game = True
                 self.screen.blit(self.display, (0, 0))
-                self.collectables.draw(self.screen, self.maze, flashs_list)
+                utils.draw_qty_items(self.screen, self.font, self.player, texts)
+                self.boxes.draw(self.screen, self.maze, flashs_list)
                 self.player.draw(57.5, 57.5)
-
                 self.maze.display_maze_cells(self.screen, cells)
 
                 pygame.display.update()
