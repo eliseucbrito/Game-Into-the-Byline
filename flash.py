@@ -106,5 +106,3 @@ class Flash(pygame.sprite.Sprite):
 
     def get_glowsticks_list(self):
         return self.glowsticks_list
-
-

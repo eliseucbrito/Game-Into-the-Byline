@@ -69,7 +69,6 @@ class Player:
 
     @property
     def position(self):
-        return self.pos_x, self.pos_y
 
     @property
     def position_maze(self):
