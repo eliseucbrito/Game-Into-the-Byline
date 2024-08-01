@@ -33,17 +33,3 @@ def cell_to_pixels(maze, cell_position):
     return new_pos
 
 
-def update_qty_items(font, player):
-    text_k = font.render(f"{player.inventory['k']}", False, (255, 255, 255))
-    text_g = font.render(f"{player.inventory['g']}", False, (255, 255, 255))
-    text_r = font.render(f"{player.inventory['r']}", False, (255, 255, 255))
-    text_s = font.render(f"{player.inventory['s']}", False, (255, 255, 255))
-    return [text_k, text_g, text_r, text_s]
-
-
-def draw_qty_items(screen, font, player, texts):
-    pos_y = 116
-
-    for text in texts:
-        screen.blit(text, (800, pos_y))
-        pos_y += 135
