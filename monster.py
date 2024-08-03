@@ -32,7 +32,10 @@ class Monster:
         try:
             for i in range(self.steps):
                 self.pos = path[self.pos]
-            return False
+            if self.pos == position:
+                return True
+            else:
+                return False
         except:
             return True
 

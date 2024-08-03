@@ -1,4 +1,5 @@
 import pygame
+import moviepy.editor
 import utils
 import maze_generator
 
@@ -31,6 +32,7 @@ bob_radar = (-1, -1)
 got_killed = False
 got_killed_billy = False
 got_killed_bob = False
+is_scared = False
 
 trigger = False
 battery_trigger = False
@@ -63,7 +65,10 @@ class Game:
 
         self.maze_map = maze_generator.get_mazemap()
         self.maze = maze_generator.Maze(57.5, 57.5, 600, 600, self.maze_map)
-
+        
+        self.is_scared_photo = pygame.image.load('assets/images/scared.png')
+        self.is_not_scared_photo = pygame.image.load('assets/images/not_scared.png')
+         
         self.score = Score(1000000)
 
         left_player, right_player, up_player, down_player = K_a, K_d, K_w, K_s
@@ -92,6 +97,7 @@ class Game:
         global got_killed
         global got_killed_billy
         global got_killed_bob
+        global is_scared
         global billy_radar
         global bob_radar
         global battery_trigger
@@ -116,10 +122,11 @@ class Game:
                         exit()
 
                     if self.map_id == "background":
+                        mousex, mousey = pygame.mouse.get_pos()
+                        print((mousex, mousey))
 
                         box_collected, item = self.boxes.get_box(event, flashs_list, glowsticks_list, self.player, self.inventory)
                         if box_collected or item == "#":
-                            print("caixa coletada")
                             texts = utils.update_qty_items(self.font, self.inventory.get_inventory())
                             self.bob.set_new_steps(7)
                             got_killed = got_killed_bob = self.bob.move(self.player.get_position_maze())
@@ -163,6 +170,11 @@ class Game:
                                 monsters_captured[1] = ([True, (y_b + 1, x_b + 1), num_flashs])
                             if got_killed:
                                 self.map_id = "dead_end"
+
+                        is_scared = False
+                        for i in range(2):
+                            if monsters_captured[i][0]:
+                                is_scared = True
 
                         door_position = self.inventory.get_door_position()
 
@@ -214,6 +226,10 @@ class Game:
                             pygame.time.delay(5000)
 
                     if self.map_id == "win_end":
+                        win_end_sound = pygame.mixer.Sound("assets/sounds/win_end_sound.mp3")
+                        win_end_sound.play()
+                        win_cutscene = moviepy.editor.VideoFileClip("assets/cutscenes/win_end.mp4")
+                        win_cutscene.preview()
                         self.map_id = "deathscore"
                         
                         data_read = open("data/data.txt", "r")
@@ -252,6 +268,12 @@ class Game:
                 self.screen.blit(self.display, (0, 0))
 
                 self.inventory.draw_glowstick(self.boxes.get_boxes_pos())
+                
+                if is_scared:
+                    self.screen.blit(self.is_scared_photo, (895, 56))
+                else:
+                    self.screen.blit(self.is_not_scared_photo, (895, 56))
+                    
 
                 if box_collected or item == "#":
                     utils.draw_item_found(self.screen, self.font_item, item_description[item], self.rect_item)

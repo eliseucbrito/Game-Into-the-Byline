@@ -7,7 +7,7 @@ from player import Player
 from inventory import Inventory
 
 
-QTY_BOXES = 400
+QTY_BOXES = 20
 glowstick_tick = 10
 radar_tick = 30
 super_battery_tick = 40
