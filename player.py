@@ -13,7 +13,6 @@ class Player:
         self.width = 10
         self.height = 10
         self.color = (33, 179, 76)
-        self.inventory = {"k": 0, "g": 1, "s": 1, "r": 1}
 
         self.window = win
         self.left = left
@@ -30,11 +29,6 @@ class Player:
             self.pos_y = random.randint(0, self.num_pixels - 1)
         else:
             self.pos_y = random.choice([0, self.num_pixels - 1])
-
-    def add_inventory(self, item):
-        if item in self.inventory:
-            self.inventory[item] += 1
-            print(self.inventory)
 
     def draw(self, maze_position):
 

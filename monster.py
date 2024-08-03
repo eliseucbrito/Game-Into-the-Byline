@@ -48,6 +48,12 @@ class Monster:
         x, y = self.pos
         return y - 1, x - 1
 
+    def get_pos(self):
+        return self.pos
+
+    def get_color(self):
+        return self.color
+
     def active_radar(self):
         self.radar_position = self.pos
 

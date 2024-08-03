@@ -9,6 +9,7 @@ from flash import Flash
 from boxes import Boxes
 from inventory import Inventory
 from monster import Monster
+from score import Score
 
 pygame.mixer.init()
 
@@ -33,9 +34,15 @@ got_killed_bob = False
 
 trigger = False
 battery_trigger = False
+
+door_position = (-1, -1)
 door_revealed = False
 
-DEATHSCORE = 1000000
+item_description = {"g": "Glowstick", "r": "Radar", "s": "Super Battery", "k": "Key", "#": "Nothing"}
+item = "nada"
+texts = ""
+box_collected = False
+
 
 class Game:
     def __init__(self):
@@ -57,6 +64,8 @@ class Game:
         self.maze_map = maze_generator.get_mazemap()
         self.maze = maze_generator.Maze(57.5, 57.5, 600, 600, self.maze_map)
 
+        self.score = Score(1000000)
+
         left_player, right_player, up_player, down_player = K_a, K_d, K_w, K_s
         self.player = Player(self.screen, left_player, right_player, up_player, down_player, num_pixels, side_pixel)
 
@@ -71,7 +80,10 @@ class Game:
         self.boxes = Boxes()
         self.boxes.generate_boxes(self.maze_map)
 
-        self.inventory = Inventory(self.screen, self.maze, self.flash, self.player, self.billy, self.bob)
+        self.inventory = Inventory(self.screen, self.maze, self.flash, self.player, self.billy, self.bob, self.score)
+
+        self.font_item = pygame.font.Font("assets/fonts/Pixelation.ttf", 23)
+        self.rect_item = pygame.Rect(897, 460, 260, 85)
 
     def run(self):
         global flashs_list
@@ -84,7 +96,10 @@ class Game:
         global bob_radar
         global battery_trigger
         global door_revealed
-        global DEATHSCORE
+        global door_position
+        global box_collected
+        global item
+        global texts
 
         while True:
             self.clock.tick(60)
@@ -101,8 +116,10 @@ class Game:
                         exit()
 
                     if self.map_id == "background":
-                        box_collected = self.boxes.get_box(event, flashs_list, self.player, self.inventory)
-                        if box_collected:
+
+                        box_collected, item = self.boxes.get_box(event, flashs_list, glowsticks_list, self.player, self.inventory)
+                        if box_collected or item == "#":
+                            print("caixa coletada")
                             texts = utils.update_qty_items(self.font, self.inventory.get_inventory())
                             self.bob.set_new_steps(7)
                             got_killed = got_killed_bob = self.bob.move(self.player.get_position_maze())
@@ -119,33 +136,29 @@ class Game:
                         billy_radar = self.billy.get_radar_position()
                         bob_radar = self.bob.get_radar_position()
 
-                        item_used = self.inventory.get_trigger(event)
-                        if item_used:
+                        used_item = self.inventory.get_trigger(event)
+                        if used_item:
                             texts = utils.update_qty_items(self.font, self.inventory.get_inventory())
-
-                        #  flashs_list = self.flash.active(event, self.maze_map, self.player.position, flashs_list)
-                        #  glowsticks_list = self.flash.get_glowsticks_list()
 
                         self.flash.active(event, self.maze_map, player_position)
 
-                        #flashs_list, trigger = self.flash.get_flashs_lists()
                         flashs_list = self.flash.get_flashs_lists()
                         glowsticks_list = self.flash.get_glowsticks_list()
 
-                        flash_used = self.flash.get_trigger(event)
+                        used_flash = self.flash.get_trigger(event)
 
-                        if flash_used:
-                            # flash_used = not flash_used
-                            DEATHSCORE -= 100
+                        if used_flash:
+                            self.score.set_highscore(100)
                             utils.remove_least_monster(monsters_captured)
-                            got_killed_billy, got_killed_bob = self.billy.move(self.player.position_maze), self.bob.move(self.player.position_maze)
+                            got_killed_billy = self.billy.move(self.player.position_maze)
+                            got_killed_bob = self.bob.move(self.player.position_maze)
                             got_killed = got_killed_billy or got_killed_bob
                             if self.billy.position() in flashs_list[-1]:
-                                DEATHSCORE -= 50
+                                self.score.set_highscore(50)
                                 x_B, y_B = self.billy.position()
                                 monsters_captured[0] = ([True, (y_B + 1, x_B + 1), num_flashs])
                             if self.bob.position() in flashs_list[-1]:
-                                DEATHSCORE -= 50
+                                self.score.set_highscore(50)
                                 x_b, y_b = self.bob.position()
                                 monsters_captured[1] = ([True, (y_b + 1, x_b + 1), num_flashs])
                             if got_killed:
@@ -163,7 +176,6 @@ class Game:
 
                     if self.map_id == "home_screen":
                         if event.key == pygame.K_1:
-                            DEATHSCORE = 1000000
                             self.map_id = "background"
                             self.display = utils.load_display(self.map_id, RESOLUTION)
                             self.music = utils.set_music(self.map_id)
@@ -191,7 +203,7 @@ class Game:
                         
                     if self.map_id == "dead_end":
                         self.map_id = "deathscore"
-                        DEATHSCORE = 0
+                        self.score.reset_highscore()
                         self.screen.fill((0, 0, 0))
                         pygame.display.update()
                         if got_killed_billy:
@@ -200,16 +212,15 @@ class Game:
                         elif got_killed_bob:
                             self.bob_scream.play()
                             pygame.time.delay(5000)
-                            
 
                     if self.map_id == "win_end":
                         self.map_id = "deathscore"
                         
                         data_read = open("data/data.txt", "r")
-                        if DEATHSCORE > int(data_read.readline()):
+                        if self.score.get_highscore() > int(data_read.readline()):
                             data_read.close()
                             data_write = open("data/data.txt", "w")
-                            data_write.write(str(DEATHSCORE))
+                            data_write.write(str(self.score.get_highscore()))
                             data_write.close()
                         
                     if self.map_id == "deathscore":
@@ -217,7 +228,7 @@ class Game:
                         self.screen.blit(self.display, (0, 0))
                         font_deathscore = pygame.font.Font("assets/fonts/Pixelation.ttf", 75)
                         
-                        text_deathscore = font_deathscore.render(f"{DEATHSCORE}", False, (255, 255, 255))
+                        text_deathscore = font_deathscore.render(f"{self.score.get_highscore()}", False, (255, 255, 255))
                         text_rect_deathscore = text_deathscore.get_rect(center = (RESOLUTION[0]/2, RESOLUTION[1]/3.7))
                         self.screen.blit(text_deathscore, text_rect_deathscore)
                         
@@ -234,35 +245,34 @@ class Game:
                         if event.key == pygame.K_r:
                             pygame.quit()
 
-                    cells = []
-
-                    for flash_list in flashs_list:
-                        for column, line in flash_list:
-                            cells.append((line + 1, column + 1))
-
-                    if len(glowsticks_list) > 0:
-                        for glowstick_position in glowsticks_list:
-                            for column, line in glowstick_position:
-                                cells.append((line + 1, column + 1))
-
-                    cells.append(self.player.position_maze)
-
             if self.map_id in ["home_screen", "guide"]:
                 self.screen.blit(self.display, (0, 0))
                 pygame.display.update()
             elif self.map_id == "background":
                 self.screen.blit(self.display, (0, 0))
+
+                self.inventory.draw_glowstick(self.boxes.get_boxes_pos())
+
+                if box_collected or item == "#":
+                    utils.draw_item_found(self.screen, self.font_item, item_description[item], self.rect_item)
+                else:
+                    utils.draw_no_item(self.screen, self.font_item, self.rect_item)
+
                 utils.draw_qty_items(self.screen, texts)
-                self.boxes.draw(self.screen, self.maze, flashs_list, glowsticks_list)
+                self.boxes.draw(self.screen, self.maze, flashs_list)
+
                 if door_revealed:
                     x, y = door_position
                     utils.draw(self.maze, self.screen, "#FFBD59", (14, 14), (y + 1, x + 1))
+
                 utils.get_monster_draw(self.maze, self.screen, monsters_captured)
                 utils.active_radar(self.screen, self.maze, (billy_radar, bob_radar))
                 utils.show_battery(self.screen, battery_trigger)
-                self.player.draw(maze_position)
+
                 self.inventory.try_generate_door()
-                self.maze.display_maze_cells(self.screen, cells)
+
+                self.player.draw(maze_position)
+                self.maze.display_maze_cells(self.screen, flashs_list, glowsticks_list, self.player.get_position_maze())
 
                 pygame.display.update()
 
