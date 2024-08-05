@@ -163,11 +163,11 @@ class Game:
                             if self.billy.position() in flashs_list[-1]:
                                 self.score.set_highscore(50)
                                 x_B, y_B = self.billy.position()
-                                monsters_captured[0] = ([True, (y_B + 1, x_B + 1), num_flashs])
+                                monsters_captured[0] = ([True, (y_B + 1, x_B + 1), num_flashs - 1])
                             if self.bob.position() in flashs_list[-1]:
                                 self.score.set_highscore(50)
                                 x_b, y_b = self.bob.position()
-                                monsters_captured[1] = ([True, (y_b + 1, x_b + 1), num_flashs])
+                                monsters_captured[1] = ([True, (y_b + 1, x_b + 1), num_flashs - 1])
                             if got_killed:
                                 self.map_id = "dead_end"
 
