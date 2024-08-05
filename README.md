@@ -8,7 +8,10 @@
 ---
 ## Instruções de como rodar o projeto:
     O arquivo python principal é o main.py, só basta rodar ele para iniciar o jogo, detalhe, as seguintes bibliotecas são exigidas: pygame, pyamaze e MoviePy.
-    Depois que inicializar o jogo, você se encontrará na tela inicial: Se apertar a tecla número 1 do seu teclado, você irá iniciar o jogo, caso aperte a tecla 2, entrará na página de tutorial, se apertar a tecla 3, fechará o jogo.
+    Depois que inicializar o jogo, você se encontrará na tela inicial: 
+        1. Se apertar a tecla número 1 do seu teclado, você irá iniciar o jogo;
+        2. Caso aperte a tecla 2, entrará na página de tutorial;
+        3. Se apertar a tecla 3, fechará o jogo.
     Obs.: A tecla "esc" fecha o jogo ao longo de toda a jogatina.
 ---
 ## Arquitetura do projeto:
