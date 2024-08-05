@@ -143,5 +143,6 @@
 ---
 ## Questionamentos do projeto:
 1. Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?
-2. Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
-3. Quais as lições aprendidas durante o projeto?
+    - O maior dos erros foi não ter aprendido o suficiente sobre como funciona o github, isso resultou em códigos que constatemente paravam de funcionar pois outros módulos eram alterados e mudavam, como exemplo, a dinâmica do _main.py_, lidamos com isso melhorando a comunicação e restringindo a dinâmica como cada módulo iria comportar, assim, mudanças nos módulos não seriam tão drásticas ao ponto de comprometer em demasiado outros pedaços de código.
+3. Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
+4. Quais as lições aprendidas durante o projeto?
