@@ -94,13 +94,13 @@
 ## Divisão do trabalho:
 - 1ª semana:
   - André Jordão: _Sound design_, _game design_, estudo de algoritmos de solução de labirintos e desenvolvimento da "IA" dos monstros;
-  - Diego Silva: 
+  - Diego Silva: Desenvolvimento dos itens e baús e _sound designe_;
   - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
-  - Pedro Santos:  Implementação do Pyamaze na geração e exibição do labirinto.  
+  - Pedro Santos:  Implementação do Pyamaze na geração e exibição do labirinto;  
   - Rodrigo Santos: Mecânica do _player_ e do _flash_ e interação entre ambos e o labirinto.
 - 2ª semana:
   - André Jordão: Aperfeiçoamento da IA do mosntro,  _game design_, _sound design_, tratamento de itens, mecânica de vitória/perda e testes;
-  - Diego Silva: 
+  - Diego Silva: Desenvolvimento dos contadores de itens e do spawn de itens no labirinto;
   - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
   - Pedro Santos: Ajustes gerais e modularização do arquivo _main_. 
   - Rodrigo Santos: Mêcanica dos itens através do inventário e as suas interações com o labirinto, o _player_, o _flash_ e os monstros, e o tratamento da porta de saída e do registro de itens.
@@ -143,6 +143,7 @@
 ---
 ## Questionamentos do projeto:
 1. Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?
-    - O maior dos erros foi não ter aprendido o suficiente sobre como funciona o github, isso resultou em códigos que constatemente paravam de funcionar pois outros módulos eram alterados e mudavam, como exemplo, a dinâmica do _main.py_, lidamos com isso melhorando a comunicação, subdividindo melhor as tarefas, criando funções extras/utilitárias e restringindo a dinâmica como cada módulo iria comportar, assim, mudanças nos módulos não seriam tão drásticas ao ponto de comprometer em demasiado outros pedaços de código e permitindo uma maior fluidez no desenvolvimento posterior.
-3. Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
-4. Quais as lições aprendidas durante o projeto?
+    - O maior dos erros foi não ter aprendido o suficiente sobre como funciona o github, isso resultou em códigos que constatemente paravam de funcionar pois outros módulos eram alterados em demasiado, como exemplo, a dinâmica do _main.py_, lidamos com isso melhorando a comunicação, subdividindo melhor as tarefas, criando funções extras/utilitárias e restringindo a dinâmica como cada módulo iria comportar, assim, mudanças nos módulos não seriam tão drásticas ao ponto de comprometer em demasiado outros pedaços de código e permitindo uma maior fluidez no desenvolvimento posterior.
+2. Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?
+    - Subdividir as tarefas e segregar as funções de cada código, mantendo a legibilidade para outros integrantes, 
+3. Quais as lições aprendidas durante o projeto?
