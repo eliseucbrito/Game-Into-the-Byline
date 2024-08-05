@@ -7,12 +7,17 @@
 - Rodrigo Florenço dos Santos (rfs6).
 ---
 ## Instruções de como rodar o projeto:
-    O arquivo python principal é o main.py, só basta rodar ele para iniciar o jogo, detalhe, as seguintes bibliotecas são exigidas: pygame, random, pyamaze e MoviePy.
-    Depois que inicializar o jogo, você se encontrará na tela inicial: 
-        1. Se apertar a tecla número 1 do seu teclado, você irá iniciar o jogo;
-        2. Caso aperte a tecla 2, entrará na página de tutorial;
-        3. Se apertar a tecla 3, fechará o jogo.
-    Obs.: A tecla "esc" fecha o jogo ao longo de toda a jogatina.
+Será necessário:
+- Python 3.12;
+- Alguma IDE ou editor de códigos que seja capaz de rodar o Python 3.12;
+- Os arquivos do jogo;
+
+O arquivo python principal é o main.py, só basta rodar ele para iniciar o jogo, detalhe, as seguintes bibliotecas são exigidas: pygame, random, pyamaze e MoviePy.
+Depois que inicializar o jogo, você se encontrará na tela inicial: 
+    1. Se apertar a tecla número 1 do seu teclado, você irá iniciar o jogo;
+    2. Caso aperte a tecla 2, entrará na página de tutorial;
+    3. Se apertar a tecla 3, fechará o jogo.
+Obs.: A tecla "esc" fecha o jogo ao longo de toda a jogatina.
 ---
 ## Arquitetura do projeto:
 - Interface 2D de vista superior;
