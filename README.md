@@ -54,8 +54,8 @@
 - monster.py: Módulo que controla os monstros, tanto o Billy quanto o Bob;
 - player.py: Módulo que instancia o player e suas mecãnicas;
 - score.py: Módulo que controla e manipula a pontuação do player;
-- solve_path: Módulo de uma única função que resolve a rota mais rápida entre 2 pontos;
-- utils: Módulo de funções utilitárias e repetitivas ao longo dos outros módulos.
+- solve_path.py: Módulo de uma única função que resolve a rota mais rápida entre 2 pontos;
+- utils.py: Módulo de funções utilitárias e repetitivas ao longo dos outros módulos.
 ---
 ## Concept arts e capturas de tela:
 - Concept arts:
