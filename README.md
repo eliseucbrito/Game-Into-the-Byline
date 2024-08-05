@@ -32,10 +32,10 @@
         - Tecla 3: _Super Battery_.
 - Mecânicas:
     - Os monstros (Billy e Bob) se deslocam pelo labirinto da mesma forma que o player e seguindo a rota mais curta entre sua posição e o _player_:
-        - Billy Billingham: Se desloca 5 "casas" em direção ao player a cada flash dado;
-        - Bob Burningham: Se desloca 3 "casas" em direção ao player a cada flash e 7 "casas" quando abre o baú.
+        - Billy Billingham: Se desloca 5 "casas" em direção ao _player_ a cada _flash_ dado;
+        - Bob Burningham: Se desloca 3 "casas" em direção ao _player_ a cada _flash_ e 7 "casas" quando abre o baú.
     - O _player_ perde quando um dos mosntros colide com ele, zerando a sua pontuação e finalizando o jogo;
-    - O _flash_ expõe todas as casas conseguintes ao sentido da seta pressionada até encontrar uma parede no mesmo sentido, além de ser o único meio com que o _player_ interaja com os baús e visualize os monstros e a porta de saída;
+    - O _flash_ expõe todas as casas conseguintes ao sentido da seta pressionada até encontrar uma parede no mesmo sentido, além de ser o único meio com que o _player_ interaja com os baús, visualize os monstros e a porta de saída;
     - Itens:
         - _Key_: Permite que o _player_ consiga escapar do labirinto assim que, no mínimo, 3 _keys_ (do total de 5 distribuídas pelo labirinto) forem coletadas;
         - _Glowstick_: Expõe todas as casas ao redor tanto verticalmente e horizontalmente quanto diagonalmente (em uma área 3x3 em relação ao player);
