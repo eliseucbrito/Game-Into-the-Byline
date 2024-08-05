@@ -7,7 +7,7 @@
 - Rodrigo Florenço dos Santos (rfs6).
 ---
 ## Instruções de como rodar o projeto:
-    O arquivo python principal é o main.py, só basta rodar ele para iniciar o jogo, detalhe, as seguintes bibliotecas são exigidas: pygame, pyamaze e MoviePy.
+    O arquivo python principal é o main.py, só basta rodar ele para iniciar o jogo, detalhe, as seguintes bibliotecas são exigidas: pygame, random, pyamaze e MoviePy.
     Depois que inicializar o jogo, você se encontrará na tela inicial: 
         1. Se apertar a tecla número 1 do seu teclado, você irá iniciar o jogo;
         2. Caso aperte a tecla 2, entrará na página de tutorial;
