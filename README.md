@@ -43,6 +43,7 @@
         - _Super Battery_: Ao ser ativado, o _flash_ irá percorrer ao menos uma parede após ela ter encontrado a primeira (isso se a primeira parede encontrada não for da borda do labirinto), tendo 25% de probabilidade de o disparo do _flash_ seguir até a borda do labirinto (_super duper battery_).
     - Assim que o _player_ coletar 3 _keys_, aparecerá momentaneamente uma indicação da porta de saída no labirinto.
 ### Função de cada arquivo:
+.
     - main.py: Arquivo principal, onde o jogo realmente irá rodar;
     - boxes.py: Módulo que lida com os baús, desde sua geração até os itens que irá conter;
     - flash.py: Módulo que lida com o flash do player e tudo relacionado com iluminação de rotas e revelação do labirinto;
