@@ -77,7 +77,10 @@
     - JetBrains Code With Me: Usada para programação em conjunto durante reuniões;
     - WhatsApp: Usada para comunicação informal;
     - Discord: Usada para comunicação formal e para reuniões;
-    - Google Drive: Tranferência de arquivos, como imagens, cutscenes e áudios.
+    - Google Drive: Tranferência de arquivos, como imagens, cutscenes e áudios;
+    - Pixiliart: Para a produção de backgrounds e imagens;
+    - Audacity: Para edição e manipulação de sons;
+    - DaVinci Resolve: Parag produzir a cut scene.
 - Bibliotecas:
     - Internas:
         - Random: Escolher p-aleatoriamente valores dentro de intervalos e listas, usada especialmente para gerar a posição do player, dos monstros, dos baús e da porta, definir os itens contidos nos baús e buscar a possibilidade de ativar a _super duper battery_.
