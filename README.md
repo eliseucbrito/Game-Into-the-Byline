@@ -45,12 +45,7 @@
 ---
 ## Concept arts e capturas de tela:
 - Concept arts:
-  ![pixil-frame-0](https://github.com/user-attachments/assets/c8e0f841-316b-441e-8d9f-dbf5578fa846)
-  
-  ![pixil-frame-0(1)](https://github.com/user-attachments/assets/bd5d0673-4ee4-43d6-9a94-923c210fd175)
-  
-  ![pixil-frame-0(2)](https://github.com/user-attachments/assets/ac4a124c-5423-4d65-b301-ddd0ecccb616)
-  
+
 - Capturas de tela:
   ![home_screen](https://github.com/user-attachments/assets/8e9b7617-b303-4e6e-8b7a-255733a4f397)
   
