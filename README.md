@@ -79,6 +79,7 @@
     - Discord: Usada para comunicação formal e para reuniões;
     - Google Drive: Tranferência de arquivos, como imagens, cutscenes e áudios;
     - Pixiliart: Para a produção de backgrounds e imagens;
+    - Freesounds.org: Banco de mídias sonoras gratuitas;
     - Audacity: Para edição e manipulação de sons;
     - DaVinci Resolve: Parag produzir a cut scene.
 - Bibliotecas:
