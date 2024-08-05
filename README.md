@@ -48,8 +48,8 @@
 ### Função de cada arquivo:
 - main.py: Arquivo principal, onde o jogo realmente irá rodar;
 - boxes.py: Módulo que lida com os baús, desde sua geração até os itens que irá conter;
-- flash.py: Módulo que lida com o flash do player e tudo relacionado com iluminação de rotas e revelação do labirinto;
-- inventory.py: Módulo responsável por tratar do inventário do player;
+- flash.py: Módulo que lida com o flash do player e tudo relacionado com iluminação de rotas e revelação do labirinto (_glowstick_ e _super battery_);
+- inventory.py: Módulo responsável por tratar do inventário do player e de alterar/comunicar-se com outros objetos;
 - maze_generator.py: Módulo que gera e trata do labirinto;
 - monster.py: Módulo que controla os monstros, tanto o Billy quanto o Bob;
 - player.py: Módulo que instancia o player e suas mecãnicas;
@@ -57,8 +57,8 @@
 - solve_path.py: Módulo de uma única função que resolve a rota mais rápida entre 2 pontos;
 - utils.py: Módulo de funções utilitárias e repetitivas ao longo dos outros módulos.
 ---
-## Concept arts e capturas de tela:
-- Concept arts:
+## _Concept arts_ e capturas de tela:
+- _Concept arts_:
 
 - Capturas de tela:
   ![home_screen](https://github.com/user-attachments/assets/8e9b7617-b303-4e6e-8b7a-255733a4f397)
@@ -92,17 +92,17 @@
 ---
 ## Divisão do trabalho:
 - 1ª semana:
-    - André Jordão: _Sound design_, _game design_, estudo de algoritmos de solução de labirintos e desenvolvimento da "IA" do monstro;
-    - Diego Silva: 
-    - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
-    - Pedro Santos: Gerador de labirintos, exibição do labirinto
-    - Rodrigo Santos: Mecânica do _player_ e do _flash_, e interação entre ambos e o labirinto.
+  - André Jordão: _Sound design_, _game design_, estudo de algoritmos de solução de labirintos e desenvolvimento da "IA" dos monstros;
+  - Diego Silva: 
+  - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
+  - Pedro Santos:  Implementação do Pyamaze na geração e exibição do labirinto.  
+  - Rodrigo Santos: Mecânica do _player_ e do _flash_ e interação entre ambos e o labirinto.
 - 2ª semana:
-    - André Jordão: Aperfeiçoamento da IA do mosntro,  _game design_, _sound design_, tratamento de itens, mecânica de vitória/perda e testes;
-    - Diego Silva: 
-    - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
-    - Pedro Santos:
-    - Rodrigo Santos: .
+  - André Jordão: Aperfeiçoamento da IA do mosntro,  _game design_, _sound design_, tratamento de itens, mecânica de vitória/perda e testes;
+  - Diego Silva: 
+  - Eliseu Brito: _Background design_, _sprite design_, _sound design_, registro para o relatório;
+  - Pedro Santos: Ajustes gerais e modularização do arquivo _main_. 
+  - Rodrigo Santos: Mêcanica dos itens através do inventário e as suas interações com o labirinto, o _player_, o _flash_ e os monstros, e o tratamento da porta de saída e do registro de itens.
 ---
 ## Conceitos aproveitados da disciplina:
 - Dicionários:
@@ -133,12 +133,12 @@
  - Funções:
     - Códigos utilitários que facilitam a construção do jogo e a exposição de cada objeto na tela.
  - POO:
-    - _Player_;
-    - _Flash_;
-    - Monstros;
-    - Inventário;
-    - Especiais;
-    - Modularização.
+     - _Player_;
+     - _Flash_;
+     - Monstros (_Monster_);
+     - Inventário (_Inventory_);
+     - Especiais (_Maze_, _Boxes_, _Score_);
+     - Modularização (_solve_path_, _utils_).
 ---
 ## Questionamentos do projeto:
 1. Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?
