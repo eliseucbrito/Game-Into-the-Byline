@@ -20,7 +20,7 @@
     - Labirinto fechado (sem porta de entrada e saída nas bordas) 20x20;
     - Labirinto gerado aleatoriamente a cada nova jogatina;
     - Baús também gerados aleatoriamente a cada nova jogatina;
-    - Contém 20 baús em posições aleatórias contendo ou itens ou estão vazias;
+    - Contém 20 baús em posições aleatórias possuindo ou não itens;
     - O labirinto só possui uma saída.
 - Jogabilidade:
     - Movimentação do player em eixos cartesianos usando o _WASD_;
