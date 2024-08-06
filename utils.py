@@ -4,6 +4,11 @@ from pygame.locals import *
 from monster import Monster
 from boxes import Boxes
 from pygame.font import Font
+import os
+import requests
+from datetime import datetime
+from time import time
+
 
 def load_display(map_id, resolution):
     if map_id == "config":
@@ -38,7 +43,8 @@ def active_radar(win, maze, billy_bob_position: tuple):
         billy, bob = billy_bob_position
         x_billy, y_billy = cell_to_pixels(maze, billy)
         x_bob, y_bob = cell_to_pixels(maze, bob)
-        pygame.draw.rect(win, (255, 153, 51), (x_billy + 8, y_billy + 8, 14, 14))
+        pygame.draw.rect(win, (255, 153, 51),
+                         (x_billy + 8, y_billy + 8, 14, 14))
         pygame.draw.rect(win, (255, 153, 51), (x_bob + 8, y_bob + 8, 14, 14))
 
     '''
@@ -111,7 +117,8 @@ def draw_item_found(screen, font: Font, item, rect_item):
     text_item_found = font.render(f"{item}", False, (255, 255, 255))
     text_item_support = font.render(f"Found!", False, (255, 255, 255))
     text_item_found_rect = text_item_found.get_rect(midbottom=rect_item.center)
-    text_item_support_rect = text_item_support.get_rect(midtop=rect_item.center)
+    text_item_support_rect = text_item_support.get_rect(
+        midtop=rect_item.center)
     screen.blit(text_item_found, text_item_found_rect)
     screen.blit(text_item_support, text_item_support_rect)
 
@@ -120,3 +127,58 @@ def draw_no_item(screen, font: Font, rect_item):
     text_no_item = font.render(f". . .", False, (255, 255, 255))
     text_no_item_rect = text_no_item.get_rect(center=rect_item.center)
     screen.blit(text_no_item, text_no_item_rect)
+
+
+API_URL = "https://into-the-byline-web.vercel.app/api"
+
+
+def get_nickname() -> str:
+    data_path = os.path.dirname(
+        os.path.abspath(__file__)) + "/data/nickname.txt"
+    if os.path.exists(data_path):
+        with open(data_path, "r", encoding="utf-8") as f:
+            nickname = f.read()
+
+        return nickname
+
+    nickname = input("Insert your nickname: ")
+    res = requests.post(f"{API_URL}/users",
+                        json={"nickname": nickname})
+
+    if res.status_code == 400:
+        print("Nickname already exists!")
+        return get_nickname()
+
+    print("Nickname saved!")
+    return nickname
+
+
+def send_score(
+        score: int,
+        used_flashs: int,
+        used_items: int,
+        monsters_appeared: int,
+        start_time: float):
+
+    nickname = get_nickname()
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    total_time = time() - start_time
+    minutes = int(total_time // 60)
+    seconds = int(total_time % 60)
+    milliseconds = int((total_time - int(total_time)) * 1000)
+
+    formatted_time = f"{minutes}:{seconds:02}:{milliseconds:03}"
+
+    data = {
+        "nickname": nickname,
+        "points": score,
+        "total_time": formatted_time,
+        "used_flashs": used_flashs,
+        "used_items": used_items,
+        "monsters_appearances": monsters_appeared,
+        "date": date
+    }
+
+    requests.post(f"{API_URL}/leadboard",
+                  json=data)
