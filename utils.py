@@ -133,8 +133,7 @@ API_URL = "https://into-the-byline-web.vercel.app/api"
 
 
 def get_nickname() -> str:
-    data_path = os.path.dirname(
-        os.path.abspath(__file__)) + "/data/nickname.txt"
+    data_path = "./data/nickname.txt"
     if os.path.exists(data_path):
         with open(data_path, "r", encoding="utf-8") as f:
             nickname = f.read()
@@ -149,6 +148,9 @@ def get_nickname() -> str:
         print("Nickname already exists!")
         return get_nickname()
 
+    with open(data_path, "w") as file:
+        file.write(nickname)
+
     print("Nickname saved!")
     return nickname
 
@@ -161,7 +163,7 @@ def send_score(
         start_time: float):
 
     nickname = get_nickname()
-    date = datetime.now().strftime("%Y-%m-%d")
+    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     total_time = time() - start_time
     minutes = int(total_time // 60)

@@ -51,8 +51,10 @@ class Inventory(pygame.sprite.Sprite):
             self.door_position = x_door, y_door
 
         if self.door_position != (-1, -1) and self.timer_door >= 0:
-            pixel_x_maze = self.maze.initial_point_x + (x_door * self.maze.cell_grid_width) + 10
-            pixel_y_maze = self.maze.initial_point_y + (y_door * self.maze.cell_grid_width) + 10
+            pixel_x_maze = self.maze.initial_point_x + \
+                (x_door * self.maze.cell_grid_width) + 10
+            pixel_y_maze = self.maze.initial_point_y + \
+                (y_door * self.maze.cell_grid_width) + 10
 
             surface_door = pygame.Surface((14, 14), pygame.SRCALPHA)
 
@@ -117,16 +119,21 @@ class Inventory(pygame.sprite.Sprite):
                 glowstick_sequences.append((y_glow + 1, x_glow + 1))
 
         for glowstick_position in glowstick_sequences:
-            x_glow, y_glow = utils.cell_to_pixels(self.maze, glowstick_position)
+            x_glow, y_glow = utils.cell_to_pixels(
+                self.maze, glowstick_position)
 
             if glowstick_position == self.billy.pos:
-                pygame.draw.rect(self.window, (244, 0, 0), (x_glow + 8, y_glow + 8, 14, 14))
+                pygame.draw.rect(self.window, (244, 0, 0),
+                                 (x_glow + 8, y_glow + 8, 14, 14))
             elif glowstick_position == self.bob.pos:
-                pygame.draw.rect(self.window, (244, 78, 63), (x_glow + 8, y_glow + 8, 14, 14))
+                pygame.draw.rect(self.window, (244, 78, 63),
+                                 (x_glow + 8, y_glow + 8, 14, 14))
             elif glowstick_position in boxes_list:
-                pygame.draw.rect(self.window, (5, 79, 119), (x_glow + 8, y_glow + 8, 14, 14))
+                pygame.draw.rect(self.window, (5, 79, 119),
+                                 (x_glow + 8, y_glow + 8, 14, 14))
             elif glowstick_position == self.get_door_position_maze():
-                pygame.draw.rect(self.window, (255, 255, 255), (x_glow + 8, y_glow + 8, 14, 14))
+                pygame.draw.rect(self.window, (255, 255, 255),
+                                 (x_glow + 8, y_glow + 8, 14, 14))
 
     def get_trigger(self, event: pygame.event) -> bool:
         flash_trigger = self.flash.get_trigger(event)
